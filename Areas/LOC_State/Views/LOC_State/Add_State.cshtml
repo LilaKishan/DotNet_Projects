@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "State";
+    Layout = "~/Views/shared/_Layout.cshtml";
+}
+<h1>Add/Edit State</h1>
+
+<div class="container-fluid border border-dark p-4">
+    <form class="row">
+        <div class="col-6">
+            <lable class="form-label">StateName</lable>
+            <input type="text" required class="form-control" id="inputAddress" placeholder="Gujrat">
+        </div>
+        <div class="col-6">
+            <lable class="form-label">Statecode</lable>
+            <input type="text" required class="form-control" id="inputAddress" placeholder="GUJ">
+        </div>
+        <div class="col-md">
+            <label for="inputState" class="form-label">Country</label>
+            <select id="inputState" class="form-select">
+                <option selected>Choose...</option>
+                <option>India</option>
+                <option>Austrelia</option>
+            </select>
+        </div>
+        <div class="col-12 my-2">
+            <button type="submit" class="btn btn-primary ">Add</button>
+        </div>
+    </form>
+</div>

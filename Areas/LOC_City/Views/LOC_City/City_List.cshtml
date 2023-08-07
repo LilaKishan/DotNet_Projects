@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "City";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <button type="button" class="btn btn-success">Add City</button>
+        <a asp-area="LOC_City" asp-action="Add_City" asp-controller="LOC_City">Add</a>
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<table class="table table-bordered table-hover text-center">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">City Name</th>
+            <th scope="col">City Code</th>
+            <th scope="col">State Name</th>
+           @* <th scope="col">State code</th>*@
+            <th scope="col">Country Name</th>
+            @*<th scope="col">Country Code</th>*@
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Rajkot</td>
+            <td>RAJ</td>
+            <td>Gujrat</td>
+            <td>India</td>
+            <td class="justify-content-center">
+                <button type="button" class="btn btn-warning">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Morbi</td>
+            <td>MOR</td>
+            <td>Gujrat</td>
+            <td>India</td>
+            <td>
+                <button type="button" class="btn btn-warning">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Ajmar</td>
+            <td>AJ</td>
+            <td>Rajsthan</td>
+            <td>India</td>
+            <td>
+                <button type="button" class="btn btn-warning">Edit</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
