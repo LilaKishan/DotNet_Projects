@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace WebApplication2.Areas.LOC_State.Controllers
 {
@@ -6,11 +8,28 @@ namespace WebApplication2.Areas.LOC_State.Controllers
     [Route("LOC_State/[controller]/[action]")]
     public class LOC_StateController : Controller
     {
-        public IActionResult Index()
+        private IConfiguration configuration;
+
+        public LOC_StateController(IConfiguration _configuration) 
         {
+            configuration= _configuration;
+        }
+        public IActionResult State_List()
+        {
+            string connctionstr = this.configuration.GetConnectionString("myConnectionString");
+            SqlConnection conn=new SqlConnection(connctionstr);
+            conn.Open();
+
+            SqlCommand objcmd= conn.CreateCommand();
+            objcmd.CommandType=CommandType.StoredProcedure;
+            objcmd.CommandText = "PR_LOC_State_selectall";
+            DataTable dt=new DataTable();
+            SqlDataReader reader=objcmd.ExecuteReader();
+            dt.Load(reader);
+            return View(dt); 
+        }
+        public IActionResult Add_State() { 
             return View();
         }
-        public IActionResult State_List() { return View(); }
-        public IActionResult Add_State() { return View(); }
     }
 }

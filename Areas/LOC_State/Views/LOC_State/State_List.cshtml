@@ -12,7 +12,8 @@
         </form>
     </div>
 </nav>
-
+@using System.Data
+@model DataTable
 <table class="table table-bordered table-hover text-center">
     <thead>
         <tr>
@@ -20,40 +21,35 @@
             <th scope="col">StateName</th>
             <th scope="col">State code</th>
             <th scope="col">Country Name</th>
+            <th scope="col">Created</th>
+            <th scope="col">Modified</th>
             @*<th scope="col">Country Code</th>*@
             <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Gujrat</td>
-            <td>GJ</td>
-            <td>India</td>
-            <td class="justify-content-center">
-                <button type="button" class="btn btn-warning">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Rajsthan</td>
-            <td>Rj</td>
-            <td>India</td>
-            <td>
-                <button type="button" class="btn btn-warning">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Madhay Pradesh</td>
-            <td>MP</td>
-            <td>India</td>
-            <td>
-                <button type="button" class="btn btn-warning">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
+        @foreach (DataRow dr in Model.Rows)
+        {
+            <tr>
+                <td>@dr["StateID"]</td>
+                <td>@dr["StateName"]</td>
+                <td>@dr["StateCode"]</td>
+                <td>@dr["CountryName"]</td>
+                <td>@Convert.ToDateTime(dr["Created"]).ToString("dd-MM-yyyy")</td>
+                <td>@Convert.ToDateTime(dr["Modified"]).ToString("dd-MM-yyyy")</td>
+                @*<td>
+                    <form method="post" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="LOC_CountryDelete">
+                        <input type="hidden" value="@Convert.ToInt32(dr["CountryID"])" name="CountryID" />
+                        <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
+                        <a class="btn btn-info btn-xs" asp-controller="LOC_Country" asp-action="LOC_CountryAdd" asp-route-countryid="@Convert.ToInt32(dr["CountryID"])">edit</a>
+                    </form>
+                </td>*@
+                <td class="justify-content-center">
+                    <button type="button" class="btn btn-warning">Edit</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+        
     </tbody>
 </table>

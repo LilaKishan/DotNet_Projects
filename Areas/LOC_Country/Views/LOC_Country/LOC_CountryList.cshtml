@@ -3,7 +3,8 @@
     Layout = "~/Views/shared/_Layout.cshtml";
 }
 
-
+@using System.Data
+@model DataTable
 <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
         <button type="button" class="btn btn-success">Add Country</button>
@@ -21,11 +22,28 @@
             <th scope="col">CountryId</th>
             <th scope="col">CountryName</th>
             <th scope="col">Country code</th>
-            <th scope="col ">Action</th>
+            <th scope="col">Created</th>
+            <th scope="col">Modified</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
+    
     <tbody>
-        <tr>
+        @foreach (DataRow dr in Model.Rows)
+        {
+            <tr>
+                <th scope="row">@dr["CountryId"]</th>
+                <td>@dr["CountryName"]</td>
+                <td>@dr["CountryCode"]</td>
+                <td>@Convert.ToDateTime(dr["Created"]).ToString()</td>
+                <td>@Convert.ToDateTime(dr["Modified"]).ToString()</td>
+                <td class="justify-content-center">
+                    <button type="button" class="btn btn-warning">Edit</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+        @*<tr>
             <th scope="row">1</th>
             <td>Mark</td>
             <td>Otto</td>
@@ -51,6 +69,6 @@
                 <button type="button" class="btn btn-warning">Edit</button>
                 <button type="button" class="btn btn-danger">Delete</button>
             </td>
-        </tr>
+        </tr>*@
     </tbody>
 </table>
