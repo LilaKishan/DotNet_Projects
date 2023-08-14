@@ -37,17 +37,23 @@
                 <td>@dr["CountryName"]</td>
                 <td>@Convert.ToDateTime(dr["Created"]).ToString("dd-MM-yyyy")</td>
                 <td>@Convert.ToDateTime(dr["Modified"]).ToString("dd-MM-yyyy")</td>
-                @*<td>
-                    <form method="post" asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="LOC_CountryDelete">
-                        <input type="hidden" value="@Convert.ToInt32(dr["CountryID"])" name="CountryID" />
-                        <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
-                        <a class="btn btn-info btn-xs" asp-controller="LOC_Country" asp-action="LOC_CountryAdd" asp-route-countryid="@Convert.ToInt32(dr["CountryID"])">edit</a>
-                    </form>
-                </td>*@
                 <td class="justify-content-center">
-                    <button type="button" class="btn btn-warning">Edit</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <div class="d-flex">
+                        <div class="me-2">
+                            <form method="post" asp-area="LOC_State" asp-controller="LOC_State" asp-action="State_Delete">
+                                <input type="hidden" value="@Convert.ToInt32(dr["StateId"])" name="StateId" />
+                                <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
+                            </form>
+                        </div>
+                        <div class="ms-2">
+                            <form asp-area="LOC_State" asp-controller="LOC_State" asp-action="State_Add">
+                                <input type="hidden" value="@Convert.ToInt32(dr["StateId"])" name="StateId" />
+                                <button type="submit" class="btn btn-warning" value="Edit">Edit</button>
+                            </form>
+                        </div>
+                    </div>
                 </td>
+                
             </tr>
         }
         

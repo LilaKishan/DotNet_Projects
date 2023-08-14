@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace WebApplication2.Areas.LOC_City.Controllers
 {
@@ -6,14 +8,36 @@ namespace WebApplication2.Areas.LOC_City.Controllers
     [Route("LOC_City/[controller]/[action]")]
     public class LOC_CityController : Controller
     {
-        
-        public IActionResult Index()
-        {
-            return View();
+
+        private IConfiguration configuration;
+        public LOC_CityController(IConfiguration _counfiguration)
+        { 
+            configuration = _counfiguration;
         }
         public IActionResult City_List()
-        { 
-            return View(); 
+        {
+            string connectionstr = this.configuration.GetConnectionString("myConnectionString");
+            SqlConnection conn=new SqlConnection(connectionstr);
+            conn.Open();   
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "PR_LOC_City_selectall";
+            DataTable table = new DataTable();
+            SqlDataReader ObjSDR= cmd.ExecuteReader();
+            table.Load(ObjSDR);
+            return View(table); 
+        }
+        public IActionResult City_Delete(int CityId)
+        {
+            string connectionstr = this.configuration.GetConnectionString("myConnectionString");
+            SqlConnection conn = new SqlConnection(connectionstr);
+            conn.Open();
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "PR_LOC_City_deletebypk";
+            cmd.Parameters.AddWithValue("@CityId", CityId);
+            cmd.ExecuteNonQuery();
+            return RedirectToAction("City_List");
         }
         public IActionResult Add_City() { return View(); }
     }

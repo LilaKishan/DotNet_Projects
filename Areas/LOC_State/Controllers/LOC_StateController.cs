@@ -28,6 +28,18 @@ namespace WebApplication2.Areas.LOC_State.Controllers
             dt.Load(reader);
             return View(dt); 
         }
+        public IActionResult State_Delete(int StateID) {
+            string connctionstr = this.configuration.GetConnectionString("myConnectionString");
+            SqlConnection conn = new SqlConnection(connctionstr);
+            conn.Open();
+
+            SqlCommand objcmd = conn.CreateCommand();
+            objcmd.CommandType = CommandType.StoredProcedure;
+            objcmd.CommandText = "PR_LOC_State_DELETEBYPK";
+            objcmd.Parameters.AddWithValue("@StateID",StateID);
+            objcmd.ExecuteNonQuery();
+            return RedirectToAction("State_List");
+        }
         public IActionResult Add_State() { 
             return View();
         }

@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
+@using System.Data
+@model DataTable
 
 <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
@@ -22,25 +24,45 @@
             <th scope="col">City Name</th>
             <th scope="col">City Code</th>
             <th scope="col">State Name</th>
-           @* <th scope="col">State code</th>*@
             <th scope="col">Country Name</th>
-            @*<th scope="col">Country Code</th>*@
+            <th scope="col">CreationDate</th>
+            <th scope="col">Modified</th>
+           
             <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Rajkot</td>
-            <td>RAJ</td>
-            <td>Gujrat</td>
-            <td>India</td>
-            <td class="justify-content-center">
-                <button type="button" class="btn btn-warning">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
-        <tr>
+        @foreach (DataRow dr in Model.Rows)
+        {
+            <tr>
+                <th scope="row">@dr["CityId"]</th>
+                <td>@dr["CityName"]</td>
+                <td>@dr["CityCode"]</td>
+                <td>@dr["StateName"]</td>
+                <td>@dr["CountryName"]</td>
+                <td>@Convert.ToDateTime(dr["CreationDate"]).ToString("dd-MM-yyyy")</td>
+                <td>@Convert.ToDateTime(dr["Modified"]).ToString("dd-MM-yyyy")</td>
+                <td class="justify-content-center">
+                    <div class="d-flex">
+                        <div class="me-2">
+                            <form method="post" asp-area="LOC_City" asp-controller="LOC_City" asp-action="City_Delete">
+                                <input type="hidden" value="@Convert.ToInt32(dr["CityId"])" name="CityId" />
+                                <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
+                            </form>
+                        </div>
+                        <div class="ms-2">
+                            <form asp-area="LOC_City" asp-controller="LOC_City" asp-action="City_Add">
+                                <input type="hidden" value="@Convert.ToInt32(dr["CityId"])" name="CityId" />
+                                <button type="submit" class="btn btn-warning" value="Edit">Edit</button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+        }
+       
+        @*<tr>
             <th scope="row">2</th>
             <td>Morbi</td>
             <td>MOR</td>
@@ -61,6 +83,6 @@
                 <button type="button" class="btn btn-warning">Edit</button>
                 <button type="button" class="btn btn-danger">Delete</button>
             </td>
-        </tr>
+        </tr>*@
     </tbody>
 </table>

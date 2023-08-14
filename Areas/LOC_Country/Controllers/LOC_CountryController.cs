@@ -27,7 +27,22 @@ namespace WebApplication2.Areas.LOC_Country.Controllers
             table.Load(objSDR);
             return View("LOC_CountryList",table);
         }
-      
-        public IActionResult Add_Country() { return View(); }
+        
+        public IActionResult LOC_Country_Delete(int CountryId)
+        {
+            string connstr = this.Configuration.GetConnectionString("myConnectionString");
+            SqlConnection connection = new SqlConnection(connstr);      
+            connection.Open();
+            SqlCommand objcmd = connection.CreateCommand();
+            objcmd.CommandType= CommandType.StoredProcedure;
+            objcmd.CommandText = "PR_LOC_Country_DELETEBYPK";
+            objcmd.Parameters.AddWithValue("@CountryId", CountryId);
+            objcmd.ExecuteNonQuery();
+
+            return RedirectToAction("LOC_CountryList");
+        }
+        public IActionResult Add_Country() { 
+            return View();
+        }
     }
 }
