@@ -6,13 +6,22 @@
 @using System.Data
 @model DataTable
 <nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
-        <button type="button" class="btn btn-success">Add Country</button>
-        <a asp-area="LOC_Country" asp-action="Add_Country" asp-controller="LOC_Country">Add</a>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+    <div class="table-header d-flex">
+        <div class="add-button mr-auto">
+            <a asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="LOC_CountryAdd">
+                <input type="button" class="btn btn-success" value="Add New Record" />
+            </a>
+        </div>
+        <div class="search-field col-xl-4 ms-lg-auto d-flex">
+            <div class="me-3">
+                <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+            </div>
+            <div>
+                <a asp-area="LOC_Country" asp-controller="LOC_Country" asp-action="LOC_CountryByName">
+                    <input type="button" class="btn btn-outline-success" value="Search" />
+                </a>
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -32,7 +41,7 @@
         @foreach (DataRow dr in Model.Rows)
         {
             <tr>
-                <th scope="row">@dr["CountryId"]</th>
+                <th scope="row">@dr["CountryID"]</th>
                 <td>@dr["CountryName"]</td>
                 <td>@dr["CountryCode"]</td>
                 <td>@Convert.ToDateTime(dr["Created"]).ToString()</td>
