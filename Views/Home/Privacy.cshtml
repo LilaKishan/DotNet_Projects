@@ -1,6 +1,31 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<h1>State list</h1>
+<hr />
+<div class="container-fluid border border-dark p-4">
+    <form class="row">
+        <div><h2>Filter</h2></div>
+       
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-4">
+            <lable class="form-label" >Select Country</lable>
+            <input type="text" required placeholder="Select Country" class="form-control">
+        </div>
+        <div class="col-4">
+            <lable class="form-label" >Select Statename</lable>
+            <input type="text" required placeholder="Select Statename" class="form-control" id="inputAddress">
+        </div>
+        <div class="col-4">
+            <lable class="form-label" >Select Statecode</lable>
+            <input type="text" required placeholder="Select statecode" class="form-control" id="inputAddress">
+        </div>
+        <div class="col my-2">
+            <button type="button" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-danger">clear</button>
+        </div>
+       
+
+    </form>
+</div>

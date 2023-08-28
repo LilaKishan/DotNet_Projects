@@ -2,37 +2,43 @@
     ViewData["Title"] = "AddCity";
     Layout = "~/Views/shared/_Layout.cshtml";
 }
-
+@model WebApplication2.Areas.LOC_City.Models.LOC_CityModel
 <h1>Add/Edit City</h1>
 
 <div class="container-fluid border border-dark p-4">
+                                                                                     
     <form class="row">
+        @Html.HiddenFor(x=>x.CityId)
         <div class="col-6">
             <lable class="form-label">City Name</lable>
-            <input type="text" required class="form-control" id="inputAddress" placeholder="Rajkot">
+            <input type="text" required class="form-control" asp-for="CityName" id="inputAddress" placeholder="Rajkot">
+            <span asp-validation-for="CityName" class="text-danger"></span>
         </div>
         <div class="col-6">
             <lable class="form-label">City code</lable>
-            <input type="text" required class="form-control" id="inputAddress" placeholder="RAJ">
+            <input type="text" required class="form-control" asp-for="Citycode" id="inputAddress" placeholder="RAJ">
+            <span asp-validation-for="Citycode" class="text-danger"></span>
         </div>
         <div class="col-md">
             <label for="inputState" class="form-label">State</label>
-            <select id="inputState" class="form-select">
-                <option selected>Choose...</option>
-                <option>Gujrat</option>
-                <option>Rajsthan</option>
+            <select id="inputState" class="form-control" asp-for="StateId" asp-items="@(new SelectList(ViewBag.StateList,"StateID","StateName"))">
+                <option selected value="">Choose...</option>
+                <span asp-validation-for="StateId" class="text-danger"></span>
+                @*<option>Gujrat</option>
+                <option>Rajsthan</option>*@
             </select>
         </div>
         <div class="col-md">
             <label for="inputState" class="form-label">Country</label>
-            <select id="inputState" class="form-select">
-                <option selected>Choose...</option>
-                <option>India</option>
-                <option>Austrelia</option>
+            <select class="form-control" asp-for="CountryId" asp-items="@(new SelectList(ViewBag.CountryList,"CountryID","CountryName"))">
+                <option selected value="">Choose...</option>
+                @*<option>India</option>
+                <option>Austrelia</option>*@
+                <span asp-validation-for="CountryId" class="text-danger"></span>
             </select>
         </div>
         <div class="col-12 my-2">
-            <button type="submit" class="btn btn-primary ">Add</button>
+            <button type="submit" class="btn btn-primary" asp-area="LOC_City" asp-action="Save" asp-controller="LOC_City">Add</button>
         </div>
     </form>
 </div>

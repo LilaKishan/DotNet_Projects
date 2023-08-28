@@ -51,7 +51,7 @@
                             </form>
                         </div>
                         <div class="ms-2">
-                            <form asp-area="LOC_City" asp-controller="LOC_City" asp-action="City_Add">
+                            <form asp-area="LOC_City" asp-controller="LOC_City" asp-action="Add_City">
                                 <input type="hidden" value="@Convert.ToInt32(dr["CityId"])" name="CityId" />
                                 <button type="submit" class="btn btn-warning" value="Edit">Edit</button>
                             </form>
@@ -62,27 +62,6 @@
             
         }
        
-        @*<tr>
-            <th scope="row">2</th>
-            <td>Morbi</td>
-            <td>MOR</td>
-            <td>Gujrat</td>
-            <td>India</td>
-            <td>
-                <button type="button" class="btn btn-warning">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Ajmar</td>
-            <td>AJ</td>
-            <td>Rajsthan</td>
-            <td>India</td>
-            <td>
-                <button type="button" class="btn btn-warning">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>*@
+       
     </tbody>
 </table>
